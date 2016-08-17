@@ -16,10 +16,30 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+#
+
+# добавил
+require 'capybara/rspec'
+
+#Capybara.register_driver :rack_test do |app|
+#  Capybara::RackTest::Driver.new(app, :headers => { 'HTTP_USER_AGENT' => 'Capybara' })
+#end
+
+Capybara.configure do |config|
+  config.run_server = false
+  config.default_driver = :selenium
+  config.app_host = 'http://localhost:3000/' # change url
+#  config.app = sample_app
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+
+  # выдавал ошибку
+  #config.infer_spec_type_from_file_location!
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
@@ -49,6 +69,11 @@ RSpec.configure do |config|
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
+
+
+#config.include Capybara::DSL
+
+#! Было закомментировано =
 =begin
   # This allows you to limit a spec run to individual examples or groups
   # you care about by tagging them with `:focus` metadata. When nothing
